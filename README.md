@@ -26,9 +26,8 @@ This project is a Pomodoro timer with Spotify integration and a playlist selecti
 
 1. **Clone the Repository**
    ```bash
-   git clone <URL-REPOSITORY-GITHUB>
+   git clone https://github.com/zahrazakila/pomodoro-app
    ```
-   Replace `<URL-REPOSITORY-GITHUB>` with the actual repository URL.
 
 2. **Navigate to the Project Directory**
    ```bash
@@ -54,7 +53,7 @@ This project is a Pomodoro timer with Spotify integration and a playlist selecti
    ```bash
    npm start
    ```
-   The app will run at `http://localhost:3000` by default.
+   The app will run at `http://localhost:3000 ` by default.
 
 ---
 
@@ -77,24 +76,6 @@ This project is a Pomodoro timer with Spotify integration and a playlist selecti
 
 ---
 
-## **Project Structure**
-
-```
-.
-├── public
-├── src
-│   ├── components
-│   │   └── Timer.js
-│   ├── styles
-│   │   └── main.css
-│   ├── utils
-│       └── spotify.js
-├── .env
-├── package.json
-└── README.md
-```
-
----
 
 ## **Contributing**
 
