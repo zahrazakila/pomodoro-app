@@ -19,6 +19,7 @@ This project is a Pomodoro timer with Spotify integration and a playlist selecti
 1. **Node.js**: Install the latest LTS version from [Node.js Official Website](https://nodejs.org/).
 2. **Spotify Developer Account**: Register at [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/).
 3. **Git**: Install Git from [Git Official Website](https://git-scm.com/).
+4. **MySQL**:  Using phpMyAdmin or terminal MySQL.
 
 ---
 
@@ -54,6 +55,20 @@ This project is a Pomodoro timer with Spotify integration and a playlist selecti
    npm start
    ```
    The app will run at `http://localhost:3000 ` by default.
+
+---
+
+## Setup Database
+
+1. **Create database**
+   ```sql
+   CREATE DATABASE pomodoro_app;
+   ```
+2. **Import file SQL**
+   ```sql
+   USE pomodoro_app;
+   SOURCE pomodoro_app.sql;
+   ```
 
 ---
 
