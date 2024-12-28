@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer with Spotify</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="min-h-screen">
+    <!-- Section 1: Timer and Tools -->
+    <section class="section-1 min-h-screen py-10 px-4">
+        <h2 class="text-4xl font-bold text-white text-center mb-10">Pomodoro Timer</h2>
+
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Left Column: Timer Controls -->
+                <div class="space-y-8">
+                    <div class="box p-6 sm:p-8">
+                        <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-[#921A40]">Customize Timer</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Pomodoro (min)</label>
+                                <input type="number" id="pomodoro-time" value="25" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C75B7A] focus:border-[#C75B7A] transition duration-200">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Short Break (min)</label>
+                                <input type="number" id="short-break-time" value="5" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C75B7A] focus:border-[#C75B7A] transition duration-200">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Long Break (min)</label>
+                                <input type="number" id="long-break-time" value="15" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C75B7A] focus:border-[#C75B7A] transition duration-200">
+                            </div>
+                        </div>
+                        <button id="set-timer" class="mt-8 w-full py-3 px-4 btn-primary text-white text-lg font-semibold rounded-lg shadow-lg transition duration-200">
+                            Set Timer
+                        </button>
+                    </div>
+
+                    <div class="box p-6 sm:p-8 flex flex-col items-center">
+                        <h2 class="text-2xl sm:text-3xl font-semibold mb-6 text-[#921A40]">Timer</h2>
+                        <p id="timer-display" class="timer-box text-[#921A40] mb-6">25:00</p>
+                        <button id="start-timer" class="w-full sm:w-auto py-3 px-8 btn-secondary text-white text-lg font-semibold rounded-lg shadow-lg transition duration-200 hidden">
+                            Start Timer
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column: Playlist and Todo -->
+                <div class="box p-6 sm:p-8">
+                    <div class="flex border-b border-gray-200 mb-6">
+                        <button class="flex-1 py-2 px-4 text-center text-sm font-medium text-[#921A40] bg-white border-b-2 border-[#921A40]" id="playlist-tab">
+                            Playlist
+                        </button>
+                        <button class="flex-1 py-2 px-4 text-center text-sm font-medium text-gray-500 hover:text-[#C75B7A]" id="todo-tab">
+                            To-Do List
+                        </button>
+                    </div>
+
+                    <div id="playlist-section">
+                        <h2 class="text-2xl sm:text-3xl font-semibold mb-6 text-[#921A40] text-center">Select a Playlist</h2>
+                        <ul id="playlist" class="space-y-4">
+                            <!-- Playlist will be rendered here by spotify.js -->
+                        </ul>
+                    </div>
+
+                    <div id="todo-section" class="hidden">
+                        <h2 class="text-2xl sm:text-3xl font-semibold mb-6 text-[#921A40] text-center">To-Do List</h2>
+                        <div class="flex space-x-4">
+                            <input type="text" id="task" placeholder="Add a new task..." class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C75B7A] focus:border-[#C75B7A] transition duration-200">
+                            <button id="add-task" class="px-6 py-3 btn-primary text-white font-semibold rounded-lg shadow transition duration-200">
+                                Add
+                            </button>
+                        </div>
+                        <ul id="tasks" class="mt-6 space-y-4"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Developer Tools -->
+    <section class="section-2 min-h-screen py-10 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-[#921A40] text-center mb-10">Developer Resources</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Code Editor -->
+                <div class="box p-6">
+                    <h3 class="text-2xl font-semibold mb-4 text-[#921A40]">Online Code Editor</h3>
+                    <div class="bg-gray-900 p-4 rounded-lg mb-4" style="height: 750px;">
+                        <iframe src="https://onecompiler.com/embed/" 
+                                class="w-full h-full rounded-s"></iframe>
+                    </div>
+                </div>                
+
+                <!-- Tech News and Quick Access -->
+                <div class="space-y-8">
+                    <!-- Latest Tech News -->
+                    <div class="box p-6">
+                        <h3 class="text-2xl font-semibold mb-4 text-[#921A40]">Latest Tech News</h3>
+                        <div id="news-container" class="space-y-4 max-h-[400px] overflow-y-auto">
+                            <p class="text-gray-600">Loading news...</p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Access Links -->
+                    <div class="box p-6">
+                        <h3 class="text-2xl font-semibold mb-4 text-[#921A40]">Quick Access</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                            <!-- GitHub -->
+                            <a href="https://github.com" target="_blank" 
+                               class="flex flex-col items-center p-4 bg-white rounded-lg border hover:border-[#C75B7A] transition-colors">
+                                <div class="w-12 h-12 mb-2 rounded-lg bg-gray-100 flex items-center justify-center">
+                                    <img src="/img/github.png" alt="GitHub" class="w-8 h-8">
+                                </div>
+                                <span class="text-sm font-medium text-[#921A40]">GitHub</span>
+                            </a>
+
+                            <!-- Dicoding -->
+                            <a href="https://dicoding.com" target="_blank"
+                               class="flex flex-col items-center p-4 bg-white rounded-lg border hover:border-[#C75B7A] transition-colors">
+                                <div class="w-12 h-12 mb-2 rounded-lg bg-gray-100 flex items-center justify-center">
+                                    <img src="/img/dicoding.png" alt="Dicoding" class="w-8 h-8">
+                                </div>
+                                <span class="text-sm font-medium text-[#921A40]">Dicoding</span>
+                            </a>
+
+                            <!-- Stack Overflow -->
+                            <a href="https://stackoverflow.com" target="_blank"
+                               class="flex flex-col items-center p-4 bg-white rounded-lg border hover:border-[#C75B7A] transition-colors">
+                                <div class="w-12 h-12 mb-2 rounded-lg bg-gray-100 flex items-center justify-center">
+                                    <img src="/img/stackoverflow.png" alt="Stack Overflow" class="w-8 h-8">
+                                </div>
+                                <span class="text-sm font-medium text-[#921A40]">Stack Overflow</span>
+                            </a>
+
+                            <!-- W3Schools -->
+                            <a href="https://www.w3schools.com" target="_blank"
+                               class="flex flex-col items-center p-4 bg-white rounded-lg border hover:border-[#C75B7A] transition-colors">
+                                <div class="w-12 h-12 mb-2 rounded-lg bg-gray-100 flex items-center justify-center">
+                                    <img src="/img/w3.png" alt="W3Schools" class="w-8 h-8">
+                                </div>
+                                <span class="text-sm font-medium text-[#921A40]">W3Schools</span>
+                            </a>
+
+                            <!-- Daring -->
+                            <a href="https://daring.uin-suka.ac.id" target="_blank"
+                               class="flex flex-col items-center p-4 bg-white rounded-lg border hover:border-[#C75B7A] transition-colors">
+                                <div class="w-12 h-12 mb-2 rounded-lg bg-gray-100 flex items-center justify-center">
+                                    <img src="/img/images.png" alt="daring" class="w-8 h-8">
+                                </div>
+                                <span class="text-sm font-medium text-[#921A40]">Daring</span>
+                            </a>
+
+                            <!-- SIA -->
+                            <a href="https://akademik.uin-suka.ac.id" target="_blank"
+                            class="flex flex-col items-center p-4 bg-white rounded-lg border hover:border-[#C75B7A] transition-colors">
+                                <div class="w-12 h-12 mb-2 rounded-lg bg-gray-100 flex items-center justify-center">
+                                    <img src="/img/images.png" alt="SIA" class="w-8 h-8">
+                                </div>
+                                <span class="text-sm font-medium text-[#921A40]">SIA</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts remain unchanged -->
+    <script src="/js/news.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/spotify.js"></script>
+    <script>
+        // Tab functionality remains unchanged
+        const playlistTab = document.getElementById('playlist-tab');
+        const todoTab = document.getElementById('todo-tab');
+        const playlistSection = document.getElementById('playlist-section');
+        const todoSection = document.getElementById('todo-section');
+
+        playlistTab.addEventListener('click', () => {
+            playlistTab.classList.add('border-b-2', 'border-[#921A40]', 'text-[#921A40]');
+            playlistTab.classList.remove('text-gray-500');
+            todoTab.classList.remove('border-b-2', 'border-[#921A40]', 'text-[#921A40]');
+            todoTab.classList.add('text-gray-500');
+            playlistSection.classList.remove('hidden');
+            todoSection.classList.add('hidden');
+        });
+
+        todoTab.addEventListener('click', () => {
+            todoTab.classList.add('border-b-2', 'border-[#921A40]', 'text-[#921A40]');
+            todoTab.classList.remove('text-gray-500');
+            playlistTab.classList.remove('border-b-2', 'border-[#921A40]', 'text-[#921A40]');
+            playlistTab.classList.add('text-gray-500');
+            todoSection.classList.remove('hidden');
+            playlistSection.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

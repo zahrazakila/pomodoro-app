@@ -1,0 +1,43 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+.box {
+    background: white;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+.box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+.timer-box {
+    font-size: 64px;
+    font-weight: 800;
+}
+@media (max-width: 640px) {
+    .timer-box {
+        font-size: 48px;
+    }
+}
+.section-1 {
+    background: linear-gradient(to bottom right, #921A40, #C75B7A);
+}
+.section-2 {
+    background: linear-gradient(to bottom right, #D9ABAB, #F4D9D0);
+}
+.btn-primary {
+    background-color: #921A40;
+}
+.btn-primary:hover {
+    background-color: #7A1635;
+}
+.btn-secondary {
+    background-color: #C75B7A;
+}
+.btn-secondary:hover {
+    background-color: #B04D68;
+}
+.hidden {
+    display: none;
+}
